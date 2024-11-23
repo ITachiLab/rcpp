@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "RC++",
+  "version": "1.0",
+  "description": "Steroids for RingCentral",
+  "host_permissions": ["<all_urls>"],
+  "content_scripts": [
+    {
+      "js": [
+        "rcpp.umd.cjs"
+      ],
+      "css": [
+        "rcpp.css"
+      ],
+      "matches": [
+        "https://app.ringcentral.com/*"
+      ]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "injectee.js"
+      ],
+      "matches": [
+        "https://app.ringcentral.com/*"
+      ]
+    }
+  ]
+}
