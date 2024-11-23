@@ -23,7 +23,7 @@ class TarArchiver extends ShallowHtmlArchiver {
 
     // The "no-cache" is to avoid CORS errors.
     // https://serverfault.com/questions/856904/chrome-s3-cloudfront-no-access-control-allow-origin-header-on-initial-xhr-req/856948#856948
-    let promise = fetch(url, {cache: "no-cache"})
+    const promise = fetch(url, {cache: "no-cache"})
         .then(response => response.blob())
         .then(blob => {
           const link = document.createElement("a");
@@ -33,7 +33,7 @@ class TarArchiver extends ShallowHtmlArchiver {
           this.tarWriter.addFile(link.href, blob);
 
           if (fileType === "png" || fileType === "jpg" || fileType === "jpeg") {
-            let image = document.createElement("img");
+            const image = document.createElement("img");
             image.src = link.href;
             image.className = "post-image";
             link.appendChild(image);

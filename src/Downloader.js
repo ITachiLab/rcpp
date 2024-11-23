@@ -6,7 +6,7 @@ class Downloader {
       "X-User-Agent": "RCAppWeb/24.4.20 (RingCentral; Linux/x86_64; build.1439; rev.322c52875)",
       "Authorization": `Bearer ${accessToken}`,
       "Content-Type": "application/json"
-    }
+    };
     this.profileUrl = `https://app-gamma.glip.com/api/person/`;
   }
 
@@ -20,14 +20,14 @@ class Downloader {
       "with_items": true,
       "mode": "scroll",
       "replies_desired": 20
-    }
+    };
     let chunk;
 
     ({data, chunk} = {...await this.__getNextChunk(data)});
 
     while (chunk != null) {
-      for (let msg of chunk.content) {
-        let profileId = msg.creator_id.toString();
+      for (const msg of chunk.content) {
+        const profileId = msg.creator_id.toString();
         if (!result.hasProfile(profileId)) {
           result.addProfile(profileId,
               await fetch(`${this.profileUrl}${profileId}`, {headers: this.headers})
@@ -51,23 +51,21 @@ class Downloader {
     const data = {
       ...inputData,
       request_id: `${Date.now()}`
-    }
-
+    };
     const postUrl = `https://app-gamma.glip.com/api/group/${data.group_id}/content`;
     const queryString = new URLSearchParams(data).toString();
 
-    let chunk = await fetch(`${postUrl}?${queryString}`, {headers: this.headers})
+    const chunk = await fetch(`${postUrl}?${queryString}`, {headers: this.headers})
         .then(res => res.json());
 
     if (chunk.content.length === 0) {
       return null;
     }
 
-
-    let lastPost = chunk.content.slice(-1)[0];
+    const lastPost = chunk.content.slice(-1)[0];
     data.post_id = lastPost._id;
 
-    return {data, chunk}
+    return {data, chunk};
   }
 }
 

@@ -1,1 +1,1 @@
-import './extension.js'
+import './extension.js';

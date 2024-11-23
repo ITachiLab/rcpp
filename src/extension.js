@@ -1,5 +1,5 @@
 import Downloader from "./Downloader.js";
-import {TarArchiver, ShallowHtmlArchiver} from './archiver'
+import {TarArchiver, ShallowHtmlArchiver} from './archiver';
 
 function createButton(menuWrapper) {
   const downloadButton = document.createElement("button");
@@ -52,8 +52,8 @@ window.onmessage = (event) => {
   if (event.data && event.data["accessToken"]) {
     downloader = new Downloader(event.data["accessToken"]);
 
-    let loadCheck = setInterval(() => {
-      let menuWrapper = document.querySelector(
+    const loadCheck = setInterval(() => {
+      const menuWrapper = document.querySelector(
           "#conversation-header-right-wrapper");
 
       if (menuWrapper != null) {
@@ -65,8 +65,8 @@ window.onmessage = (event) => {
 };
 
 function injectScript(file_path, tag) {
-  let node = document.getElementsByTagName(tag)[0];
-  let script = document.createElement('script');
+  const node = document.getElementsByTagName(tag)[0];
+  const script = document.createElement('script');
   script.setAttribute('type', 'text/javascript');
   script.setAttribute('src', file_path);
   node.appendChild(script);
