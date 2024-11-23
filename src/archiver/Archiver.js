@@ -15,25 +15,20 @@ class Archiver {
   }
 
   /**
-   * Invoked once when entering the conversation.
+   * Invoked when entering the conversation.
    *
    * This method is always the first to be called when the visiting process
-   * starts.
+   * starts. It doesn't take any parameters (as of now), so it serves a sole
+   * purpose of the visiting entry method.
    */
-  enterConversation() {
+  visitConversation() {
   }
 
   /**
-   * Invoked once when leaving the conversation.
+   * Invoked for each message which is not a reply.
    *
-   * This method is always the last to be called when the visiting process
-   * finishes.
-   */
-  exitConversation() {
-  }
-
-  /**
-   * Invoked each time a message object starts.
+   * This method is guaranteed to be invoked in the same order as the messages
+   * appear in the conversation (oldest first).
    *
    * The generic form of a message object is given below.
    * @example
@@ -65,44 +60,25 @@ class Archiver {
    * }
    *
    * @param {Object} msg - the message object
-   * @see exitMessage
    */
-  enterMessage(msg) {
+  visitMessage(msg) {
   }
 
   /**
-   * Invoked each time a message object ends.
-   *
-   * The example message object is given in {@link enterMessage} documentation.
-   *
-   * @param {Object} msg - the message object
-   * @see enterMessage
-   */
-  exitMessage(msg) {
-  }
-
-  /**
-   * Invoked each time a message reply object starts.
+   * Invoked for each message reply.
    *
    * The reply object looks almost exactly like the normal message object
-   * (take a look at {@link enterMessage}), however, it also has the "chain_id"
+   * (take a look at {@link visitMessage}), however, it also has the "chain_id"
    * property which identifies a chain of messages to which the reply belongs.
    * All replies belonging to the same thread has the same "chain_id".
    *
-   * @param {Object} reply - the message reply object
-   * @see enterMessage
-   * @see exitReply
-   */
-  enterReply(reply) {
-  }
-
-  /**
-   * Invoked each time a message reply object ends.
+   * This method is guaranteed to be invoked in the same order as the replies
+   * appear in the conversation (oldest first).
    *
    * @param {Object} reply - the message reply object
-   * @see enterReply
+   * @see visitMessage
    */
-  exitReply(reply) {
+  visitReply(reply) {
   }
 
   /**
@@ -178,18 +154,22 @@ class Archiver {
   }
 
   /**
-   * Invoked for the post
-   * @param date
+   * Invoked for each file item appearing in the message or reply.
+   *
+   * @param {String} url - the URL where the item is reachable
+   * @param {String} name - the name of the file
+   * @param {String} fileType - the type of the file
    */
-  visitDate(date) {
-  }
-
-  visitMessageContent(content) {
-  }
-
   visitItemFile(url, name, fileType) {
   }
 
+  /**
+   * Invoked for a code snippet appearing in the message or reply.
+   *
+   * @param {String} name - the name of the snippet
+   * @param {String} content - the raw content
+   * @param {String} mimeType - the MIME type (contains snippet's language)
+   */
   visitItemCodeSnippet(name, content, mimeType) {
   }
 }
