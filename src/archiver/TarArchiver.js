@@ -28,6 +28,7 @@ class TarArchiver extends ShallowHtmlArchiver {
         .then(blob => {
           const link = document.createElement("a");
           link.href = `assets/${Date.now()}_${name}`;
+          link.target = "_blank";
           container.appendChild(link);
 
           this.tarWriter.addFile(link.href, blob);
