@@ -1,4 +1,4 @@
-import Archive from "./Archive.js";
+import Bulk from "./Bulk.js";
 
 class Downloader {
   constructor(accessToken) {
@@ -11,7 +11,7 @@ class Downloader {
   }
 
   async downloadMessages(groupId) {
-    let result = new Archive();
+    const result = new Bulk();
 
     let data = {
       "limit": 80,
