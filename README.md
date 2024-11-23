@@ -15,7 +15,7 @@ The easiest way is to download a release from the releases page, which is just a
 
 ### Firefox
 
-1. Navigate to: [about:debugging](about:debugging).
+1. Navigate to: [about:addons](about:addons).
 2. Click on the gear icon, and select: "Debug Add-ons".
 3. Click on the "Load Temporary Add-on".
 4. Open the `manifest.json` from the extension's directory.
